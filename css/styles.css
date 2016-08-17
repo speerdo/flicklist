@@ -4,7 +4,14 @@ For CSS stuff, make good use of the Chrome Developer Tools:
 -- on the demo page, open up the inspector and poke around.
 -- on your own page, use dev tools to add and modify styles directly in the browser.
 */
-
+.item-watchlist {
+	display: inline-block;
+	padding: 60px;
+	margin: 10px 10px 0px 0px;
+	background: orange;
+	color: white;
+	
+}
 
 /*
 TODO 4
@@ -13,7 +20,9 @@ give these elements a display property of inline-block
 and then style them as shown in the example (padding, margin, background, etc)
 */
 
-
+body {
+	color: gray;	
+}
 /*
 TODO 5 
 Make all elements have color: gray; by default
@@ -51,6 +60,8 @@ ul {
 
 button, input[type="submit"] {
 	border-width: 0px;
+	background: orange;
+	color: white;
 	/*
 	TODO 7
 	give these buttons some padding, and color them orange with white text

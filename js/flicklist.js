@@ -14,7 +14,7 @@ var model = {
 
 var api = {
   root: "https://api.themoviedb.org/3",
-  token: "8e888fa39ec243e662e1fb738c42ae99" // TODO 0 add your api key
+  token: "a1b082ca856132e06508772abb410c59" //  0 add your api key
 }
 
 
@@ -47,12 +47,20 @@ function discoverMovies(callback) {
  */
 function searchMovies(searchTerm, callback) {
   console.log("searching for movies with '" + searchTerm + "' in their title...");
-
-  // TODO 9
+  $.ajax({
+      url: api.root + "/search/movie",
+      data: {
+        api_key: api.token,
+        query: searchTerm
+      },
+      success: function(response) {
+        model.browseItems = response.results;
+        callback();
+      }
+    });
+  // TO DO 9
   // implement this function as described in the comment above
   // you can use the body of discoverMovies as a jumping off point
-
-
 }
 
 
@@ -70,7 +78,8 @@ function render() {
     var title = $("<p></p>").text(movie.original_title);
     var itemView = $("<li></li>")
       .append(title)
-      // TODO 3
+      .attr("class", "item-watchlist");
+      // TO DO 3
       // give itemView a class attribute of "item-watchlist"
 
     $("#section-watchlist ul").append(itemView);
@@ -84,14 +93,15 @@ function render() {
       .click(function() {
         model.watchlistItems.push(movie);
         render();
-      });
-      // TODO 2
+      })
+      .prop("disabled", model.watchlistItems.indexOf(movie) !== -1);
+      // TO DO 2
       // the button should be disabled if this movie is already in
       // the user's watchlist
       // see jQuery .prop() and Array.indexOf()
 
+var description = $("<p></p>").text(movie.overview);
 
-    // TODO 1
     // create a paragraph containing the movie object's .overview value
     // then, in the code block below,
     // append the paragraph in between the title and the button
@@ -101,6 +111,7 @@ function render() {
     var itemView = $("<li></li>")
       .append($("<hr/>"))
       .append(title)
+      .append(description)
       .append(button);
 
     // append the itemView to the list
